@@ -20,3 +20,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware('role:admin')->group(function () {
+    Route::get('/admin', function () {
+        return 'halaman admin';
+    })->name('admin');
+});
+
+Route::get('/penulis', function () {
+    return 'halaman Penulis';
+})->name('penulis');
