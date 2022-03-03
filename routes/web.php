@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ Route::middleware('role:admin', 'auth')->group(function () {
     Route::get('/admin', function () {
         return view('admin.dashboard');
     })->name('admin');
+    Route::resource('/tags', TagController::class);
 });
 
 Route::get('/penulis', function () {

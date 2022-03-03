@@ -30,7 +30,8 @@
   <link href="{{ asset('') }}assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="{{ asset('') }}assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  {{-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> --}}
+  <script src="https://kit.fontawesome.com/dbf5dfd73c.js" crossorigin="anonymous"></script>
   <link href="{{ asset('') }}assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('') }}assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
@@ -42,7 +43,18 @@
     <!-- Navbar -->
     @include('layout.navbar')
     <!-- End Navbar -->
-    @yield('content')
+    <div class="container-fluid py-4">
+      @yield('content')
+    </div>
+    <div class="position-fixed top-0 end-0 p-3" style="display:none" id="live">
+      <div id="liveToast" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body font-weight-bold" id="message"></div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+    
   </main>
   @include('layout.configuration')
   <!--   Core JS Files   -->
@@ -64,6 +76,17 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{ asset('') }}assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+  <script>
+    @if(session()->has('success'))
+      var toastLiveExample = document.getElementById('liveToast')
+      var live = document.getElementById('live')
+      var message = document.getElementById('message')
+      live.style.display = "block"
+      message.innerText = '{{ session("success") }}'
+      var toast = new bootstrap.Toast(toastLiveExample)
+      toast.show()
+    @endif
+  </script>
   @yield('script')
 </body>
 
