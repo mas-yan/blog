@@ -17,13 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/tes', function () {
+    return view('layout.master');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware('role:admin')->group(function () {
+Route::middleware('role:admin', 'auth')->group(function () {
     Route::get('/admin', function () {
-        return 'halaman admin';
+        return view('admin.dashboard');
     })->name('admin');
 });
 
