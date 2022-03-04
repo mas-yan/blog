@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('tags')->unique();
+            $table->string('image');
+            $table->string('category')->unique();
             $table->string('slug')->unique();
-            $table->enum('bg', ['bg-dark', 'bg-danger', 'bg-secondary', 'bg-warning', 'bg-primary', 'bg-info', 'bg-success']);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('categories');
     }
 };
