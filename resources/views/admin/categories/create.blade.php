@@ -29,6 +29,7 @@
                     </div>
                     <button class="btn btn-success">Add Category</button>
                 </form>
+            </div>
         </div>
     </div>
 </div>

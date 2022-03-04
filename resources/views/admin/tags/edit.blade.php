@@ -21,6 +21,7 @@
                     </div>
                     <button class="btn btn-success">Update Tags</button>
                 </form>
+            </div>
         </div>
     </div>
 </div>

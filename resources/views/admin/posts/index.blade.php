@@ -32,7 +32,7 @@
                                     <h6 class="text-sm mb-0 d-inline-block text-truncate" style="max-width: 150px;">{{ $post->title }}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6 class="text-sm mb-0">{{ $post->category->category }}</h6>
+                                    <h6 class="text-sm mb-0 d-inline-block text-truncate" style="max-width: 150px;">{{ $post->category->category }}</h6>
                                 </td>
                                 <td class="text-center">
                                     <div class="d-inline-block text-truncate" style="max-width: 250px;">

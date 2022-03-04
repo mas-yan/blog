@@ -20,6 +20,7 @@
                     </div>
                     <button class="btn btn-success">Add Tags</button>
                 </form>
+            </div>
         </div>
     </div>
 </div>

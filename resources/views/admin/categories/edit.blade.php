@@ -30,6 +30,7 @@
                     </div>
                     <button class="btn btn-success">Edit Category</button>
                 </form>
+            </div>
         </div>
     </div>
 </div>

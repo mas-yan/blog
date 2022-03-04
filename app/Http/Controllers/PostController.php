@@ -83,7 +83,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::get();
+        $tags = Tag::get();
+        return view('admin.posts.edit', compact('categories', 'tags', 'post'));
     }
 
     /**
@@ -95,7 +97,38 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'category' => ['required'],
+            'article' => ['required'],
+            'image' => ['image', 'mimes:png,jpg,jpeg', 'max:2048'],
+            'title' => ['required', 'unique:posts,title'],
+        ]);
+
+        $image = $request->file('image');
+        if ($image) {
+            Storage::disk('local')->delete('public/Post/' . $post->image);
+            $image->storeAs('public/Post', $image->hashName());
+
+            $post->update([
+                'user_id' => auth()->user()->id,
+                'category_id' => $request->category,
+                'article' => $request->article,
+                'image' => $image->hashName(),
+                'title' => $request->title,
+                'slug' => str()->slug($request->title)
+            ]);
+        } else {
+            $post->update([
+                'user_id' => auth()->user()->id,
+                'category_id' => $request->category,
+                'article' => $request->article,
+                'title' => $request->title,
+                'slug' => str()->slug($request->title)
+            ]);
+        }
+
+        $post->tags()->sync($request->tags);
+        return redirect()->route('posts.index')->with('success', 'Success Updated Posts');
     }
 
     /**
