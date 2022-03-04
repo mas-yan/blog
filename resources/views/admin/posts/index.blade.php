@@ -13,27 +13,39 @@
                             <tr>
                                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">No</th>
                                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">image</th>
-                                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Posts</th>
+                                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Title</th>
+                                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Category</th>
+                                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tags</th>
                                 <th class="text-center text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($posts as $key => $Posts)
+                            @forelse ($posts as $key => $post)
                             <tr>
                                 <td class="text-center">
                                     <h6 class="mb-0 text-sm">{{ $key+$posts->firstItem() }}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <img src="{{ asset('storage/Posts/'.$Posts->image) }}" class="avatar avatar-md" alt="Posts">
+                                    <img src="{{ asset('storage/Post/'.$post->image) }}" class="avatar avatar-md" alt="Posts">
                                 </td>
                                 <td class="text-center">
-                                <h6 class="text-sm mb-0">{{ $Posts->Posts }}</h6>
+                                    <h6 class="text-sm mb-0 d-inline-block text-truncate" style="max-width: 150px;">{{ $post->title }}</h6>
+                                </td>
+                                <td class="text-center">
+                                    <h6 class="text-sm mb-0">{{ $post->category->category }}</h6>
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-inline-block text-truncate" style="max-width: 250px;">
+                                        @foreach ($post->tags as $tag)
+                                            <h6 class="mb-0 {{ $tag->bg }} badge">{{ $tag->tags }}</h6>
+                                        @endforeach
+                                    </div>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <form action="{{ route('posts.destroy', $Posts->slug) }}" method="POST">
+                                    <form action="{{ route('posts.destroy', $post->slug) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <a href="{{ route('posts.edit', $Posts->slug) }}" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                             Edit
                                         </a>
                                         <button class="btn btn-danger" onclick="return confirm('are you sure delete this?')">Delete</button>
@@ -54,4 +66,3 @@
     </div>
 </div>
 @endsection
-@section('script')

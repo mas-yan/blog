@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -16,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(5);
+        $posts = Post::with(['tags', 'category'])->paginate(10);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -42,13 +43,13 @@ class PostController extends Controller
     {
         $request->validate([
             'category' => ['required'],
-            'article' => ['required', 'unique:posts,article'],
+            'article' => ['required'],
             'image' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
-            'title' => ['required'],
+            'title' => ['required', 'unique:posts,title'],
         ]);
 
         $image = $request->file('image');
-        $image->storeAs('public/posts', $image->hashName());
+        $image->storeAs('public/Post', $image->hashName());
 
         $post = Post::create([
             'user_id' => auth()->user()->id,
@@ -60,7 +61,7 @@ class PostController extends Controller
         ]);
 
         $post->tags()->attach($request->tags);
-        return redirect()->route('tags.index')->with('success', 'Success Added Tags');
+        return redirect()->route('posts.index')->with('success', 'Success Added Posts');
     }
 
     /**
@@ -105,6 +106,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        Storage::disk('local')->delete('public/Post/' . $post->image);
+        $post->delete();
     }
 }
