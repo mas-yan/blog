@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -73,7 +74,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        // dd($category->slug);
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -85,7 +87,31 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'image' => ['image', 'mimes:png,jpg,jpeg', 'max:2048'],
+            'category' => [
+                'required',
+                Rule::unique('categories')->ignore($category->id),
+            ]
+        ]);
+
+        $image = $request->file('image');
+        if ($image) {
+            Storage::disk('local')->delete('public/Category/' . $category->image);
+            $image->storeAs('public/Category', $image->hashName());
+            $category->update([
+                'image' => $image->hashName(),
+                'category' => $request->category,
+                'slug' => str()->slug($request->category),
+            ]);
+        } else {
+            $category->update([
+                'category' => $request->category,
+                'slug' => str()->slug($request->category),
+            ]);
+        }
+
+        return redirect()->route('categories.index')->with('success', 'Success Updated Category');
     }
 
     /**
