@@ -29,7 +29,7 @@
                                     <form action="{{ route('tags.destroy', $tag->slug) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <a href="javascript:;" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="{{ route('tags.edit', $tag->slug) }}" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                             Edit
                                         </a>
                                         <button class="btn btn-danger" onclick="return confirm('are you sure delete this?')">Delete</button>

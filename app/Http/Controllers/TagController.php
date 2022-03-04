@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TagController extends Controller
 {
@@ -59,7 +60,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        // 
     }
 
     /**
@@ -70,7 +71,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
@@ -82,7 +83,18 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $request->validate([
+            'tags' => [
+                'required',
+                Rule::unique('tags')->ignore($tag->id),
+            ]
+        ]);
+
+        $tag->update([
+            'tags' => $request->tags,
+            'slug' => str()->slug($request->tags),
+        ]);
+        return redirect()->route('tags.index')->with('success', 'Success Update Tags');
     }
 
     /**
