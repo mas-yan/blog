@@ -35,6 +35,7 @@
   <link href="{{ asset('') }}assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('') }}assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+  @yield('style')
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
