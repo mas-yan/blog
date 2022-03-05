@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 
 class userContoller extends Controller
@@ -63,7 +64,7 @@ class userContoller extends Controller
      */
     public function show($id)
     {
-        //
+        // 
     }
 
     /**
@@ -74,7 +75,9 @@ class userContoller extends Controller
      */
     public function edit($id)
     {
-        //
+        $roles = Role::get();
+        $user = User::find($id);
+        return view('admin.users.edit', compact('roles', 'user'));
     }
 
     /**
@@ -86,7 +89,33 @@ class userContoller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'role' => 'required',
+            'email' => [
+                'required',
+                Rule::unique('users')->ignore($id)
+            ],
+            'password' => ['confirmed']
+        ]);
+
+        $user = User::find($id);
+
+        if ($request->password) {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
+        } else {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+        }
+
+        $user->syncRoles($request->role);
+        return redirect()->route('users.index')->with('success', 'Success Updated User');
     }
 
     /**

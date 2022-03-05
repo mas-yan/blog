@@ -1,11 +1,11 @@
 @extends('layout.master')
-@section('title','Edit Category')
+@section('title','Edit Role')
 @section('content')
 <div class="row">
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <h6>Edit Category</h6>
+                <h6>Edit Role</h6>
                 <a href="{{ route('roles.index') }}" class="btn btn-secondary">Back</a>
                 <form action="{{ route('roles.update', $role->id) }}" method="POST">
                     @csrf

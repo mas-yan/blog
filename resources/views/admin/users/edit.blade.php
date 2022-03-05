@@ -1,17 +1,18 @@
 @extends('layout.master')
-@section('title','Add User')
+@section('title','Edit User')
 @section('content')
 <div class="row">
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <h6>Add User</h6>
+                <h6>Edit User</h6>
                 <a href="{{ route('users.index') }}" class="btn btn-secondary">Back</a>
-                <form action="{{  route('users.store')  }}" method="POST">
+                <form action="{{  route('users.update', $user->id)  }}" method="POST">
                     @csrf
+                    @method('put')
                     <div class="mb-3">
                         <label for='name'>Name</label>
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Full Name" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Full Name" name="name" value="{{ old('name', $user->name) }}" autocomplete="name" autofocus>
 
                         @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -21,7 +22,7 @@
                     </div>
                     <div class="mb-3">
                         <label for='email'>Email</label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" autocomplete="email">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email', $user->email) }}" autocomplete="email">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -43,27 +44,32 @@
                     </div>
                         @foreach ($roles as $role)
                         <div class="form-check">
-                            <input class="form-check-input" name="role[]" type="checkbox" value="{{ $role->name }}" id="role{{ $role->id }}" 
+                            <input class="form-check-input" name="role[]" type="checkbox" value="{{ $role->name }}" 
                             @if (old('role'))
                                 @foreach (old('role') as $value)
                                     @if ($value == $role->name)
                                         checked
                                     @endif
                                 @endforeach
+                            @else
+                                @foreach ($user->roles as $item)
+                                    @if ($item->name == $role->name)
+                                        checked
+                                    @endif
+                                @endforeach
                             @endif
-
-                            >
+                            id="role{{ $role->id }}">
                             <label class="form-check-label" for="role{{ $role->id }}">
-                                {{ $role->name }}
+                              {{ $role->name }}
                             </label>
-                        </div>
+                          </div>
                         @endforeach
                         @error('role')
                             <p class="text-danger" role="alert">
                                 {{ $message }}
                             </p>
                         @enderror
-                    <button class="btn btn-success" type="submit">Add User</button>
+                    <button class="btn btn-success" type="submit">Edit User</button>
                 </form>
             </div>
         </div>
