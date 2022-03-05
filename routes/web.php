@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\userContoller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,8 +28,6 @@ Route::get('/tes', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::middleware('role:admin', 'auth')->prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
@@ -37,6 +36,7 @@ Route::middleware('role:admin', 'auth')->prefix('admin')->group(function () {
     Route::resource('/categories', CategoryController::class);
     Route::resource('/posts', PostController::class);
     Route::resource('/roles', RoleController::class)->except('show');
+    Route::resource('/users', userContoller::class);
 });
 
 Route::get('/penulis', function () {

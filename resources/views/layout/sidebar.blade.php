@@ -18,7 +18,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('tags') || request()->is('tags/*') ? 'active' : '' }}" href="{{ route('tags.index') }}">
+        <a class="nav-link {{ request()->is('admin/tags') || request()->is('admin/tags/*') ? 'active' : '' }}" href="{{ route('tags.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-solid fa-tags"></i>
           </div>
@@ -26,7 +26,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('categories') || request()->is('categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
+        <a class="nav-link {{ request()->is('admin/categories') || request()->is('admin/categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-solid fa-folder"></i>
           </div>
@@ -34,7 +34,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('posts') || request()->is('posts/*') ? 'active' : '' }}" href="{{ route('posts.index') }}">
+        <a class="nav-link {{ request()->is('admin/posts') || request()->is('admin/posts/*') ? 'active' : '' }}" href="{{ route('posts.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-solid fa-newspaper"></i>
           </div>
@@ -42,7 +42,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('roles') || request()->is('roles/*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
+        <a class="nav-link {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-solid fa-users"></i>
           </div>
@@ -53,9 +53,9 @@
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('categories') || request()->is('categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
+        <a class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}" href="{{ route('users.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fa fa-solid fa-folder"></i>
+            <i class="fa fa-solid fa-user"></i>
           </div>
           <span class="nav-link-text ms-1">Users</span>
         </a>
