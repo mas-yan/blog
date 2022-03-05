@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,13 +29,14 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware('role:admin', 'auth')->group(function () {
-    Route::get('/admin', function () {
+Route::middleware('role:admin', 'auth')->prefix('admin')->group(function () {
+    Route::get('/', function () {
         return view('admin.dashboard');
     })->name('admin');
     Route::resource('/tags', TagController::class);
     Route::resource('/categories', CategoryController::class);
     Route::resource('/posts', PostController::class);
+    Route::resource('/roles', RoleController::class)->except('show');
 });
 
 Route::get('/penulis', function () {
