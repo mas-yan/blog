@@ -61,7 +61,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('categories') || request()->is('categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
+        <a class="nav-link {{ request()->is('menu') || request()->is('menu/*') ? 'active' : '' }}" href="{{ route('menu.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-solid fa-folder"></i>
           </div>

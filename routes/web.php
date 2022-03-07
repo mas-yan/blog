@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TagController;
@@ -37,6 +38,7 @@ Route::middleware('role:admin', 'auth')->prefix('admin')->group(function () {
     Route::resource('/posts', PostController::class);
     Route::resource('/roles', RoleController::class)->except('show');
     Route::resource('/users', userContoller::class);
+    Route::resource('/menu', MenuController::class);
 });
 
 Route::get('/penulis', function () {
