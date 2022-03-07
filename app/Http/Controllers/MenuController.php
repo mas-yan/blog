@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class MenuController extends Controller
 {
@@ -31,6 +32,36 @@ class MenuController extends Controller
             'slug' => str()->slug($request->menu),
         ]);
 
+        return redirect()->route('menu.index')->with('success', 'Menu Success Added');
+    }
+
+    public function edit(Menu $menu)
+    {
+        return view('admin.menu.edit', compact('menu'));
+    }
+
+    public function update(Menu $menu, Request $request)
+    {
+        $this->validate($request, [
+            'menu' => [
+                'required',
+                Rule::unique('menus')->ignore($menu->id)
+            ],
+            'link' => 'required'
+        ]);
+
+        $menu->update([
+            'menu' => $request->menu,
+            'link' => $request->link,
+            'slug' => str()->slug($request->menu),
+        ]);
+
+        return redirect()->route('menu.index')->with('success', 'Menu Success Added');
+    }
+
+    public function destroy(Menu $menu)
+    {
+        $menu->delete();
         return redirect()->route('menu.index')->with('success', 'Menu Success Added');
     }
 }

@@ -9,4 +9,9 @@ class Menu extends Model
 {
     use HasFactory;
     protected $fillable = ['menu', 'slug', 'link'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
