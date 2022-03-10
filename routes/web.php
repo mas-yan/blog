@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\Permissioncontroller;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SliderController;
@@ -30,7 +31,7 @@ Route::get('/tes', function () {
 
 Auth::routes();
 
-Route::middleware('role:admin', 'auth')->prefix('admin')->group(function () {
+Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('admin');
@@ -41,6 +42,8 @@ Route::middleware('role:admin', 'auth')->prefix('admin')->group(function () {
     Route::resource('/users', userContoller::class);
     Route::resource('/menu', MenuController::class);
     Route::resource('/sliders', SliderController::class);
+    Route::get('/permissions', [Permissioncontroller::class, 'index'])->name('permissions.index');
+    Route::get('/permissions/{id}', [Permissioncontroller::class, 'show'])->name('permissions.show');
 });
 
 Route::get('/penulis', function () {

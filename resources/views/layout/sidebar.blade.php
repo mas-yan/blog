@@ -17,14 +17,16 @@
           <span class="nav-link-text ms-1">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->is('admin/tags') || request()->is('admin/tags/*') ? 'active' : '' }}" href="{{ route('tags.index') }}">
-          <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fa fa-solid fa-tags"></i>
-          </div>
-          <span class="nav-link-text ms-1">Tags</span>
-        </a>
-      </li>
+      @can('manage_tags')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->is('admin/tags') || request()->is('admin/tags/*') ? 'active' : '' }}" href="{{ route('tags.index') }}">
+            <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa fa-solid fa-tags"></i>
+            </div>
+            <span class="nav-link-text ms-1">Tags</span>
+          </a>
+        </li>
+      @endcan
       <li class="nav-item">
         <a class="nav-link {{ request()->is('admin/categories') || request()->is('admin/categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -85,15 +87,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('categories') || request()->is('categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
-          <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fa fa-solid fa-folder"></i>
-          </div>
-          <span class="nav-link-text ms-1">Role</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->is('categories') || request()->is('categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
+        <a class="nav-link {{ request()->is('permissions') || request()->is('permissions/*') ? 'active' : '' }}" href="{{ route('permissions.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-solid fa-folder"></i>
           </div>
@@ -102,7 +96,7 @@
       </li>
     </ul>
   </div>
-  <div class="sidenav-footer mx-3 ">
+  {{-- <div class="sidenav-footer mx-3 ">
     <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
       <div class="full-background" style="background-image: url('{{ asset('') }}assets/img/curved-images/white-curved.jpeg')"></div>
       <div class="card-body text-start p-3 w-100">
@@ -117,5 +111,5 @@
       </div>
     </div>
     <a class="btn bg-gradient-primary mt-4 w-100" href="https://www.creative-tim.com/product/soft-ui-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
-  </div>
+  </div> --}}
 </aside>

@@ -25,6 +25,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('manage_tags', function ($user) {
+            return $user->hasAnyPermission([
+                'tag_show',
+                'tag_create',
+                'tag_update',
+                'tag_delete',
+            ]);
+        });
     }
 }

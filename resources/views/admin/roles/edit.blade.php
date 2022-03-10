@@ -19,6 +19,14 @@
                             </div>
                         @enderror
                     </div>
+                    @foreach ($permissions as $permission)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ $permission->id }}" id="flexCheckChecked" name="permissions[]">
+                            <label class="form-check-label" for="flexCheckChecked">
+                            {{ $permission->name }}
+                            </label>
+                        </div>
+                    @endforeach
                     <button class="btn btn-success">Edit Role</button>
                 </form>
             </div>
