@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:post_show', ['only' => 'index']);
+        $this->middleware('permission:post_create', ['only' => 'create', 'store']);
+        $this->middleware('permission:post_update', ['only' => 'update', 'edit']);
+        $this->middleware('permission:post_delete', ['only' => 'destroy']);
+        $this->middleware('permission:post_detail', ['only' => 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *

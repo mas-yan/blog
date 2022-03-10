@@ -9,6 +9,13 @@ use Illuminate\Validation\Rule;
 
 class SliderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:slider_show', ['only' => 'index']);
+        $this->middleware('permission:slider_create', ['only' => 'create', 'store']);
+        $this->middleware('permission:slider_update', ['only' => 'update', 'edit']);
+        $this->middleware('permission:slider_delete', ['only' => 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      *

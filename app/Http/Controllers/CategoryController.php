@@ -9,6 +9,15 @@ use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:category_show', ['only' => 'index']);
+        $this->middleware('permission:category_create', ['only' => 'create', 'store']);
+        $this->middleware('permission:category_update', ['only' => 'update', 'edit']);
+        $this->middleware('permission:category_delete', ['only' => 'destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *

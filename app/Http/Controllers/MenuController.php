@@ -8,6 +8,14 @@ use Illuminate\Validation\Rule;
 
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:menu_show', ['only' => 'index']);
+        $this->middleware('permission:menu_create', ['only' => 'create', 'store']);
+        $this->middleware('permission:menu_update', ['only' => 'update', 'edit']);
+        $this->middleware('permission:menu_delete', ['only' => 'destroy']);
+    }
+
     public function index()
     {
         $menus = Menu::paginate('5');

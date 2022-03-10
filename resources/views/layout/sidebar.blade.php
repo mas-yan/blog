@@ -27,22 +27,26 @@
           </a>
         </li>
       @endcan
-      <li class="nav-item">
-        <a class="nav-link {{ request()->is('admin/categories') || request()->is('admin/categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
-          <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fa fa-solid fa-folder"></i>
-          </div>
-          <span class="nav-link-text ms-1">Categories</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->is('admin/posts') || request()->is('admin/posts/*') ? 'active' : '' }}" href="{{ route('posts.index') }}">
-          <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fa fa-solid fa-newspaper"></i>
-          </div>
-          <span class="nav-link-text ms-1">Posts</span>
-        </a>
-      </li>
+      @can('manage_categories')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->is('admin/categories') || request()->is('admin/categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
+            <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa fa-solid fa-folder"></i>
+            </div>
+            <span class="nav-link-text ms-1">Categories</span>
+          </a>
+        </li>
+      @endcan
+      @can('manage_categories')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->is('admin/posts') || request()->is('admin/posts/*') ? 'active' : '' }}" href="{{ route('posts.index') }}">
+            <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa fa-solid fa-newspaper"></i>
+            </div>
+            <span class="nav-link-text ms-1">Posts</span>
+          </a>
+        </li>
+      @endcan
       <li class="nav-item">
         <a class="nav-link {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -54,30 +58,36 @@
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
       </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}" href="{{ route('users.index') }}">
-          <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fa fa-solid fa-user"></i>
-          </div>
-          <span class="nav-link-text ms-1">Users</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->is('admin/menu') || request()->is('admin/menu/*') ? 'active' : '' }}" href="{{ route('menu.index') }}">
-          <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fa fa-solid fa-folder"></i>
-          </div>
-          <span class="nav-link-text ms-1">Menu</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->is('admin/sliders') || request()->is('admin/sliders/*') ? 'active' : '' }}" href="{{ route('sliders.index') }}">
-          <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fa fa-solid fa-folder"></i>
-          </div>
-          <span class="nav-link-text ms-1">Sliders</span>
-        </a>
-      </li>
+      @can('manage_users')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}" href="{{ route('users.index') }}">
+            <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa fa-solid fa-user"></i>
+            </div>
+            <span class="nav-link-text ms-1">Users</span>
+          </a>
+        </li>
+      @endcan
+      @can('manage_menu')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->is('admin/menu') || request()->is('admin/menu/*') ? 'active' : '' }}" href="{{ route('menu.index') }}">
+            <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa fa-solid fa-folder"></i>
+            </div>
+            <span class="nav-link-text ms-1">Menu</span>
+          </a>
+        </li>
+      @endcan
+      @can('manage_sliders')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->is('admin/sliders') || request()->is('admin/sliders/*') ? 'active' : '' }}" href="{{ route('sliders.index') }}">
+            <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa fa-solid fa-folder"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sliders</span>
+          </a>
+        </li>
+      @endcan
       <li class="nav-item">
         <a class="nav-link {{ request()->is('categories') || request()->is('categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -86,14 +96,16 @@
           <span class="nav-link-text ms-1">trash</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->is('permissions') || request()->is('permissions/*') ? 'active' : '' }}" href="{{ route('permissions.index') }}">
-          <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fa fa-solid fa-folder"></i>
-          </div>
-          <span class="nav-link-text ms-1">Permission</span>
-        </a>
-      </li>
+      @can('manage_permissions')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->is('permissions') || request()->is('permissions/*') ? 'active' : '' }}" href="{{ route('permissions.index') }}">
+            <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa fa-solid fa-folder"></i>
+            </div>
+            <span class="nav-link-text ms-1">Permission</span>
+          </a>
+        </li>
+      @endcan
     </ul>
   </div>
   {{-- <div class="sidenav-footer mx-3 ">
