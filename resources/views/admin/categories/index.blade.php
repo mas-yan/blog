@@ -6,7 +6,9 @@
         <div class="card">
             <div class="card-body">
                 <h6>Category Post</h6>
-                <a href="{{ route('categories.create') }}" class="btn btn-primary">Add Category</a>
+                @can('category_create')
+                    <a href="{{ route('categories.create') }}" class="btn btn-primary">Add Category</a>
+                @endcan
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0">
                         <thead>
@@ -14,7 +16,9 @@
                                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">No</th>
                                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">image</th>
                                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Category</th>
-                                <th class="text-center text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                                @canany(['category_update','category_delete','category_detail'])
+                                    <th class="text-center text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -33,10 +37,14 @@
                                     <form action="{{ route('categories.destroy', $category->slug) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <a href="{{ route('categories.edit', $category->slug) }}" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                            Edit
-                                        </a>
-                                        <button class="btn btn-danger" onclick="return confirm('are you sure delete this?')">Delete</button>
+                                        @can('category_update')
+                                            <a href="{{ route('categories.edit', $category->slug) }}" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                Edit
+                                            </a>
+                                        @endcan
+                                        @can('category_delete')
+                                            <button class="btn btn-danger" onclick="return confirm('are you sure delete this?')">Delete</button>
+                                        @endcan
                                     </form>
                                 </td>
                             </tr>

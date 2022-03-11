@@ -41,6 +41,7 @@
                         <label for='password-confirm'>Password Confirm</label>
                         <input id="password-confirm" type="password" class="form-control" placeholder="Password Confirmation" name="password_confirmation" autocomplete="new-password">
                     </div>
+                    <label>Role</label>
                         @foreach ($roles as $role)
                         <div class="form-check">
                             <input class="form-check-input" name="role[]" type="checkbox" value="{{ $role->name }}" id="role{{ $role->id }}" 

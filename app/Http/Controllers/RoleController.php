@@ -42,7 +42,9 @@ class RoleController extends Controller
         $request->validate([
             'role' => 'required|unique:roles,name'
         ]);
-        Role::create(['name' => $request->role]);
+        $role = Role::create(['name' => $request->role]);
+        $role->givePermissionTo($request->permissions);
+
         return redirect()->route('roles.index')->with('success', 'Success Added Role');
     }
 
@@ -66,7 +68,6 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         $permissions = Permission::get();
-        // dd($role->permissions);
         return view('admin.roles.edit', compact('role', 'permissions'));
     }
 

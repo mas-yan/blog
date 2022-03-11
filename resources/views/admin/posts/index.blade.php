@@ -6,7 +6,9 @@
         <div class="card">
             <div class="card-body">
                 <h6>Posts Post</h6>
-                <a href="{{ route('posts.create') }}" class="btn btn-primary">Add Posts</a>
+                @can('post_create')
+                    <a href="{{ route('posts.create') }}" class="btn btn-primary">Add Posts</a>
+                @endcan
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0">
                         <thead>
@@ -16,7 +18,9 @@
                                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Title</th>
                                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Category</th>
                                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tags</th>
-                                <th class="text-center text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                                @canany(['post_update','post_delete','post_detail'])
+                                    <th class="text-center text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -45,10 +49,19 @@
                                     <form action="{{ route('posts.destroy', $post->slug) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                            Edit
-                                        </a>
-                                        <button class="btn btn-danger" onclick="return confirm('are you sure delete this?')">Delete</button>
+                                        @can('post_detail')
+                                            <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                Show
+                                            </a>
+                                        @endcan
+                                        @can('post_update')
+                                            <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                Edit
+                                            </a>
+                                        @endcan
+                                        @can('post_delete')
+                                            <button class="btn btn-danger" onclick="return confirm('are you sure delete this?')">Delete</button>
+                                        @endcan
                                     </form>
                                 </td>
                             </tr>

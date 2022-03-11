@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 
@@ -135,6 +136,16 @@ class userContoller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        try {
+            DB::beginTransaction();
+            $user->removeRole($user->roles->first());
+            $user->delete();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+        return redirect()->route('users.index')->with('success', 'Success Deleted User');
     }
 }

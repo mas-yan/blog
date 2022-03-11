@@ -6,14 +6,18 @@
         <div class="card">
             <div class="card-body">
                 <h6>Tags Post</h6>
-                <a href="{{ route('tags.create') }}" class="btn btn-primary">Add Tags</a>
+                @can('tag_create')
+                    <a href="{{ route('tags.create') }}" class="btn btn-primary">Add Tags</a>
+                @endcan
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">No</th>
                                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tags</th>
-                                <th class="text-center text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                                @canany(['tag_update','tag_delete','tag_detail'])
+                                    <th class="text-center text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -29,10 +33,14 @@
                                     <form action="{{ route('tags.destroy', $tag->slug) }}" method="POST">
                                         @csrf
                                         @method('delete')
+                                        @can('tag_update')
                                         <a href="{{ route('tags.edit', $tag->slug) }}" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                             Edit
                                         </a>
-                                        <button class="btn btn-danger" onclick="return confirm('are you sure delete this?')">Delete</button>
+                                        @endcan
+                                        @can('tag_delete')
+                                            <button class="btn btn-danger" onclick="return confirm('are you sure delete this?')">Delete</button>
+                                        @endcan
                                     </form>
                                 </td>
                             </tr>

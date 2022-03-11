@@ -40,7 +40,7 @@
           </a>
         </li>
       @endcan
-      @can('manage_categories')
+      @can('manage_posts')
         <li class="nav-item">
           <a class="nav-link {{ request()->is('admin/posts') || request()->is('admin/posts/*') ? 'active' : '' }}" href="{{ route('posts.index') }}">
             <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
