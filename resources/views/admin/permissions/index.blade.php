@@ -35,7 +35,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                    {{ $permissions->onEachSide(1)->links() }}
+                    {{ $permissions->onEachSide(5)->links() }}
                 </div>
             </div>
         </div>

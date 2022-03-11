@@ -7,8 +7,11 @@
     </a>
   </div>
   <hr class="horizontal dark mt-0">
-  <div class="collapse navbar-collapse w-auto max-height-vh-100 h-100" id="sidenav-collapse-main">
+  <div class="collapse navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
+      <li class="nav-item mt-3">
+        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Main Menu</h6>
+      </li>
       <li class="nav-item">
         <a class="nav-link {{ request()->is('admin') ? 'active' : '' }}" href="/admin">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -47,12 +50,35 @@
           </a>
         </li>
       @endcan
+      <li class="nav-item mt-3">
+        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Setting</h6>
+      </li>
+      @can('manage_menu')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->is('admin/menu') || request()->is('admin/menu/*') ? 'active' : '' }}" href="{{ route('menu.index') }}">
+            <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa fa-solid fa-bars"></i>
+            </div>
+            <span class="nav-link-text ms-1">Menu</span>
+          </a>
+        </li>
+      @endcan
+      @can('manage_sliders')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->is('admin/sliders') || request()->is('admin/sliders/*') ? 'active' : '' }}" href="{{ route('sliders.index') }}">
+            <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa fa-solid fa-tv"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sliders</span>
+          </a>
+        </li>
+      @endcan
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
+        <a class="nav-link {{ request()->is('categories') || request()->is('categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fa fa-solid fa-users"></i>
+            <i class="fa fa-solid fa-trash"></i>
           </div>
-          <span class="nav-link-text ms-1">Roles</span>
+          <span class="nav-link-text ms-1">trash</span>
         </a>
       </li>
       <li class="nav-item mt-3">
@@ -68,39 +94,19 @@
           </a>
         </li>
       @endcan
-      @can('manage_menu')
-        <li class="nav-item">
-          <a class="nav-link {{ request()->is('admin/menu') || request()->is('admin/menu/*') ? 'active' : '' }}" href="{{ route('menu.index') }}">
-            <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fa fa-solid fa-folder"></i>
-            </div>
-            <span class="nav-link-text ms-1">Menu</span>
-          </a>
-        </li>
-      @endcan
-      @can('manage_sliders')
-        <li class="nav-item">
-          <a class="nav-link {{ request()->is('admin/sliders') || request()->is('admin/sliders/*') ? 'active' : '' }}" href="{{ route('sliders.index') }}">
-            <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fa fa-solid fa-folder"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sliders</span>
-          </a>
-        </li>
-      @endcan
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('categories') || request()->is('categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
+        <a class="nav-link {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fa fa-solid fa-folder"></i>
+            <i class="fa fa-solid fa-users"></i>
           </div>
-          <span class="nav-link-text ms-1">trash</span>
+          <span class="nav-link-text ms-1">Roles</span>
         </a>
       </li>
       @can('manage_permissions')
         <li class="nav-item">
-          <a class="nav-link {{ request()->is('permissions') || request()->is('permissions/*') ? 'active' : '' }}" href="{{ route('permissions.index') }}">
+          <a class="nav-link {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active' : '' }}" href="{{ route('permissions.index') }}">
             <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fa fa-solid fa-folder"></i>
+              <i class="fa fa-solid fa-key"></i>
             </div>
             <span class="nav-link-text ms-1">Permission</span>
           </a>
@@ -108,20 +114,7 @@
       @endcan
     </ul>
   </div>
-  {{-- <div class="sidenav-footer mx-3 ">
-    <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
-      <div class="full-background" style="background-image: url('{{ asset('') }}assets/img/curved-images/white-curved.jpeg')"></div>
-      <div class="card-body text-start p-3 w-100">
-        <div class="bg-dark text-white icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
-          <i class="ni ni-diamond text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
-        </div>
-        <div class="docs-info">
-          <h6 class="text-white up mb-0">Need help?</h6>
-          <p class="text-xs font-weight-bold">Please check our docs</p>
-          <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/soft-ui-dashboard" target="_blank" class="btn btn-white btn-sm w-100 mb-0">Documentation</a>
-        </div>
-      </div>
-    </div>
+  <div class="sidenav-footer mx-3 ">
     <a class="btn bg-gradient-primary mt-4 w-100" href="https://www.creative-tim.com/product/soft-ui-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
-  </div> --}}
+  </div>
 </aside>
