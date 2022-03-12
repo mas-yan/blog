@@ -5,7 +5,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <h6>Posts Tag {{ $tag->tags }}</h6>
+                <h6>Posts Tag {{ $category->category }}</h6>
                 <table class="table align-items-center mb-0">
                     <thead>
                         <tr>
@@ -21,6 +21,7 @@
                         @forelse ($posts as $key => $post)
                         <tr>
                             <td class="text-center">
+                                {{-- <h6 class="mb-0 text-sm">{{ $key+1 }}</h6> --}}
                                 <h6 class="mb-0 text-sm">{{ $key+$posts->firstItem() }}</h6>
                             </td>
                             <td class="text-center">

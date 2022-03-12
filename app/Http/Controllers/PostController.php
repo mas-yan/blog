@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -110,7 +111,10 @@ class PostController extends Controller
             'category' => ['required'],
             'article' => ['required'],
             'image' => ['image', 'mimes:png,jpg,jpeg', 'max:2048'],
-            'title' => ['required', 'unique:posts,title'],
+            'title' => [
+                'required',
+                Rule::unique('posts')->ignore($post->id)
+            ],
         ]);
 
         $image = $request->file('image');

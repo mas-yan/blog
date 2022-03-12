@@ -26,7 +26,7 @@ class PermissionSeeder extends Seeder
             'category_create',
             'category_update',
             'category_delete',
-            // 'category_detail',
+            'category_detail',
             'post_show',
             'post_create',
             'post_update',

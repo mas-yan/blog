@@ -37,6 +37,11 @@
                                     <form action="{{ route('categories.destroy', $category->slug) }}" method="POST">
                                         @csrf
                                         @method('delete')
+                                        @can('category_detail')
+                                            <a href="{{ route('categories.show', $category->slug) }}" class="btn btn-success font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                Show
+                                            </a>
+                                        @endcan
                                         @can('category_update')
                                             <a href="{{ route('categories.edit', $category->slug) }}" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                                 Edit

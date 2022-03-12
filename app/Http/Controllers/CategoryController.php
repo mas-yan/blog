@@ -13,6 +13,7 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware('permission:category_show', ['only' => 'index']);
+        $this->middleware('permission:category_detail', ['only' => 'show']);
         $this->middleware('permission:category_create', ['only' => 'create', 'store']);
         $this->middleware('permission:category_update', ['only' => 'update', 'edit']);
         $this->middleware('permission:category_delete', ['only' => 'destroy']);
@@ -25,7 +26,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(5);
+        $categories = Category::paginate(10);
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -72,7 +73,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $posts = $category->posts()->with(['tags', 'category'])->paginate(5);
+        return view('admin.categories.show', compact('category', 'posts'));
     }
 
     /**
