@@ -11,6 +11,7 @@ class TagController extends Controller
     public function __construct()
     {
         $this->middleware('permission:tag_show', ['only' => 'index']);
+        $this->middleware('permission:tag_detail', ['only' => 'show']);
         $this->middleware('permission:tag_create', ['only' => 'create', 'store']);
         $this->middleware('permission:tag_update', ['only' => 'update', 'edit']);
         $this->middleware('permission:tag_delete', ['only' => 'destroy']);
@@ -67,7 +68,8 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        // 
+        $tag->with('posts');
+        return view('admin.tags.show', compact('tag'));
     }
 
     /**

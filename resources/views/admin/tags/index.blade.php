@@ -33,6 +33,11 @@
                                     <form action="{{ route('tags.destroy', $tag->slug) }}" method="POST">
                                         @csrf
                                         @method('delete')
+                                        @can('tag_detail')
+                                        <a href="{{ route('tags.show', $tag->slug) }}" class="btn btn-success font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                            Show
+                                        </a>
+                                        @endcan
                                         @can('tag_update')
                                         <a href="{{ route('tags.edit', $tag->slug) }}" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                             Edit

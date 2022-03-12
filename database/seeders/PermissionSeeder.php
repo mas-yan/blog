@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionSeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class PermissionSeeder extends Seeder
             'tag_create',
             'tag_update',
             'tag_delete',
+            'tag_detail',
             'category_show',
             'category_create',
             'category_update',
@@ -52,9 +54,11 @@ class PermissionSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create([
+            $perm = Permission::create([
                 'name' => $permission
             ]);
+            $admin = Role::find(1);
+            $admin->givePermissionTo($perm);
         }
     }
 }
