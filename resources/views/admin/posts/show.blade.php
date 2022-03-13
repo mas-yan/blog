@@ -28,10 +28,10 @@
         <div class="col-auto my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
             <div class="nav-wrapper position-relative end-0">
                 <p class="mb-0 font-weight-bold text-sm">
-                    DI Posting {{ $post->created_at->translatedFormat('l, jS F Y') }}
+                    DI Posting {{ $post->DateHuman }}
                 </p>
                 <p class="mb-0 text-center font-weight-bold text-sm mt-2">
-                    <small> {{ $post->created_at->diffForHumans() }} </small>
+                    <small> {{ $post->Date }} </small>
                 </p>
             </div>
         </div>

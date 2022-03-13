@@ -28,7 +28,7 @@
                                     <h6 class="mb-0 text-sm">{{ $key+$categories->firstItem() }}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <img src="{{ asset('storage/Category/'.$category->image) }}" class="avatar avatar-md" alt="category">
+                                    <img src="{{ $category->image }}" class="avatar avatar-md" alt="category">
                                 </td>
                                 <td class="text-center">
                                 <h6 class="text-sm mb-0">{{ $category->category }}</h6>
