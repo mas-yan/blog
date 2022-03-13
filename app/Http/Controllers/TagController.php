@@ -68,7 +68,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        $posts = $tag->posts()->with(['tags', 'category'])->paginate(10);
+        $posts = $tag->posts()->latest()->with(['tags', 'category'])->paginate(10);
         return view('admin.tags.show', compact('tag', 'posts'));
     }
 

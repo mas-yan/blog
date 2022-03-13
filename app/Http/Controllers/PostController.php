@@ -27,7 +27,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['tags', 'category'])->paginate(10);
+        $posts = Post::latest()->with(['tags', 'category'])->paginate(10);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -82,7 +82,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('admin.posts.show', compact('post'));
     }
 
     /**

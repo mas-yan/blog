@@ -73,7 +73,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $posts = $category->posts()->with(['tags', 'category'])->paginate(5);
+        $posts = $category->posts()->latest()->with(['tags', 'category'])->paginate(5);
         return view('admin.categories.show', compact('category', 'posts'));
     }
 

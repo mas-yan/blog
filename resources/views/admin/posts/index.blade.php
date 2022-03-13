@@ -50,7 +50,7 @@
                                         @csrf
                                         @method('delete')
                                         @can('post_detail')
-                                            <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                            <a href="{{ route('posts.show', $post->slug) }}" class="btn btn-success font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                                 Show
                                             </a>
                                         @endcan
