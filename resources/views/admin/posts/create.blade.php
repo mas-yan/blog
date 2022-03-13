@@ -32,7 +32,7 @@
                     </div>
                     <div class="mb-3">
                         <label for='article'>Article</label>
-                        <input type='text' name='article' placeholder="Insert Article" value="{{ old('article') }}" id='article' class='form-control @error('article') is-invalid @enderror'>
+                        <textarea name='article' placeholder="Insert Article" id='article' class='form-control @error('article') is-invalid @enderror'>{{ old('article') }}</textarea>
                         @error('article')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -89,7 +89,16 @@
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+<script>
+  var options = {
+    filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+    filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+    filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+    filebrowserUploadUrl: `/laravel-filemanager/upload?type=Files&_token=`
+  };
+  CKEDITOR.replace('article', options);
+</script>
 <script>
     $(document).ready(function() {
         $('.selects').select2({

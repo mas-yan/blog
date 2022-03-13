@@ -42,7 +42,7 @@
         <div class="col">
             <h5 class="text-center">{{ $post->title }}</h5>
             <p>
-                {{ $post->article }}
+                {!! $post->article !!}
             </p>
             <hr>
             <div class="text-center">

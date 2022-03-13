@@ -46,6 +46,10 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/permissions/{id}', [Permissioncontroller::class, 'show'])->name('permissions.show');
 });
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
 Route::get('/penulis', function () {
     return 'halaman Penulis';
 })->name('penulis');
