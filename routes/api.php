@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\SliderController;
 use Illuminate\Http\Request;
@@ -28,3 +29,4 @@ Route::get('categories', [CategoryController::class, 'index']);
 Route::get('category/{category}', [CategoryController::class, 'show']);
 Route::get('categoryHome', [CategoryController::class, 'categoryHome']);
 Route::get('sliders', SliderController::class);
+Route::get('menu', MenuController::class);
