@@ -21,17 +21,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/tes', function () {
-    return view('layout.master');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
-
-Route::middleware('auth')->prefix('admin')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('admin');
@@ -45,11 +40,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/permissions', [Permissioncontroller::class, 'index'])->name('permissions.index');
     Route::get('/permissions/{id}', [Permissioncontroller::class, 'show'])->name('permissions.show');
 });
-
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
-
-Route::get('/penulis', function () {
-    return 'halaman Penulis';
-})->name('penulis');

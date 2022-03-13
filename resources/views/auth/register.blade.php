@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('auth.layout.master')
 
 @section('content')
 <div class="container">
@@ -69,6 +69,9 @@
                             </div>
                         </div>
                     </form>
+                    <div class="text-center">
+                        <p class="text-sm mt-3 mb-0">Already have an account? <a href="/login" class="text-dark font-weight-bolder">Sign in</a></p>
+                    </div>
                 </div>
             </div>
         </div>

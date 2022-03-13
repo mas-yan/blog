@@ -13,7 +13,7 @@
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Main Menu</h6>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('admin') ? 'active' : '' }}" href="/admin">
+        <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-tachometer" aria-hidden="true"></i>
           </div>
@@ -22,7 +22,7 @@
       </li>
       @can('manage_tags')
         <li class="nav-item">
-          <a class="nav-link {{ request()->is('admin/tags') || request()->is('admin/tags/*') ? 'active' : '' }}" href="{{ route('tags.index') }}">
+          <a class="nav-link {{ request()->is('/tags') || request()->is('/tags/*') ? 'active' : '' }}" href="{{ route('tags.index') }}">
             <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-solid fa-tags"></i>
             </div>
@@ -32,7 +32,7 @@
       @endcan
       @can('manage_categories')
         <li class="nav-item">
-          <a class="nav-link {{ request()->is('admin/categories') || request()->is('admin/categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
+          <a class="nav-link {{ request()->is('/categories') || request()->is('/categories/*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
             <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-solid fa-folder"></i>
             </div>
@@ -42,7 +42,7 @@
       @endcan
       @can('manage_posts')
         <li class="nav-item">
-          <a class="nav-link {{ request()->is('admin/posts') || request()->is('admin/posts/*') ? 'active' : '' }}" href="{{ route('posts.index') }}">
+          <a class="nav-link {{ request()->is('/posts') || request()->is('/posts/*') ? 'active' : '' }}" href="{{ route('posts.index') }}">
             <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-solid fa-newspaper"></i>
             </div>
@@ -55,7 +55,7 @@
       </li>
       @can('manage_menu')
         <li class="nav-item">
-          <a class="nav-link {{ request()->is('admin/menu') || request()->is('admin/menu/*') ? 'active' : '' }}" href="{{ route('menu.index') }}">
+          <a class="nav-link {{ request()->is('/menu') || request()->is('/menu/*') ? 'active' : '' }}" href="{{ route('menu.index') }}">
             <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-solid fa-bars"></i>
             </div>
@@ -65,7 +65,7 @@
       @endcan
       @can('manage_sliders')
         <li class="nav-item">
-          <a class="nav-link {{ request()->is('admin/sliders') || request()->is('admin/sliders/*') ? 'active' : '' }}" href="{{ route('sliders.index') }}">
+          <a class="nav-link {{ request()->is('/sliders') || request()->is('/sliders/*') ? 'active' : '' }}" href="{{ route('sliders.index') }}">
             <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-solid fa-tv"></i>
             </div>
@@ -78,7 +78,7 @@
       </li>
       @can('manage_users')
         <li class="nav-item">
-          <a class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}" href="{{ route('users.index') }}">
+          <a class="nav-link {{ request()->is('/users') || request()->is('/users/*') ? 'active' : '' }}" href="{{ route('users.index') }}">
             <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-solid fa-user"></i>
             </div>
@@ -87,7 +87,7 @@
         </li>
       @endcan
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
+        <a class="nav-link {{ request()->is('/roles') || request()->is('/roles/*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
           <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-solid fa-users"></i>
           </div>
@@ -96,7 +96,7 @@
       </li>
       @can('manage_permissions')
         <li class="nav-item">
-          <a class="nav-link {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active' : '' }}" href="{{ route('permissions.index') }}">
+          <a class="nav-link {{ request()->is('/permissions') || request()->is('/permissions/*') ? 'active' : '' }}" href="{{ route('permissions.index') }}">
             <div class="icon-sm shadow border-radius-md bg-dark text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-solid fa-key"></i>
             </div>
