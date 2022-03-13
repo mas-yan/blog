@@ -31,9 +31,9 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for='article'>Article</label>
-                        <textarea name='article' placeholder="Insert Article" id='article' class='form-control @error('article') is-invalid @enderror'>{{ old('article') }}</textarea>
-                        @error('article')
+                        <label for='description'>Description</label>
+                        <textarea name='description' placeholder="Insert Description" id='description' class='form-control @error('description') is-invalid @enderror'>{{ old('description') }}</textarea>
+                        @error('description')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -74,6 +74,15 @@
                             @endif
                           </select>
                         @error('tags')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for='article'>Article</label>
+                        <textarea name='article' placeholder="Insert Article" id='article' class='form-control @error('article') is-invalid @enderror'>{{ old('article') }}</textarea>
+                        @error('article')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

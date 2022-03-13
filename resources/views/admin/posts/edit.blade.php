@@ -32,6 +32,15 @@
                         @enderror
                     </div>
                     <div class="mb-3">
+                        <label for='description'>Description</label>
+                        <textarea name='description' placeholder="Insert Description" id='description' class='form-control @error('description') is-invalid @enderror'>{{ old('description',$ppost->description) }}</textarea>
+                        @error('description')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label for='category'>Category</label>
                         <select class="select form-control @error('category') is-invalid @enderror" name="category">
                             <option disabled selected>Pilih Kategori</option>

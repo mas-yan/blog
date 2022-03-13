@@ -12,7 +12,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'category_id', 'image', 'article', 'title', 'slug'];
+    protected $fillable = ['user_id', 'category_id', 'image', 'description', 'article', 'title', 'slug'];
 
     public function getRouteKeyName()
     {
@@ -38,25 +38,4 @@ class Post extends Model
     {
         return "{$this->created_at->translatedFormat('l, jS F Y')}";
     }
-
-    // protected function title(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn ($value, $attributes) => new Post(
-    //             $attributes['title_line_one'],
-    //             $attributes['title_line_two'],
-    //         ),
-    //     );
-    //     // return Attribute::make(
-    //     //     get: fn ($value, $attributes) => new Address(
-    //     //         $attributes['title_line_one'],
-    //     //         $attributes['title_line_two'],
-    //     //     ),
-    //     // );
-    // }
-
-    // public function getCreatedAtAttribute($value)
-    // {
-    //     return Carbon::parse($value)->translatedFormat('l, jS F Y');
-    // }
 }

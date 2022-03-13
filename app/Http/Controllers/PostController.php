@@ -54,6 +54,7 @@ class PostController extends Controller
         $request->validate([
             'category' => ['required'],
             'article' => ['required'],
+            'description' => ['required'],
             'image' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
             'title' => ['required', 'unique:posts,title'],
         ]);
@@ -65,6 +66,7 @@ class PostController extends Controller
             'user_id' => auth()->user()->id,
             'category_id' => $request->category,
             'article' => $request->article,
+            'description' => $request->description,
             'image' => $image->hashName(),
             'title' => $request->title,
             'slug' => str()->slug($request->title)
@@ -110,6 +112,7 @@ class PostController extends Controller
         $request->validate([
             'category' => ['required'],
             'article' => ['required'],
+            'description' => ['required'],
             'image' => ['image', 'mimes:png,jpg,jpeg', 'max:2048'],
             'title' => [
                 'required',
@@ -126,6 +129,7 @@ class PostController extends Controller
                 'user_id' => auth()->user()->id,
                 'category_id' => $request->category,
                 'article' => $request->article,
+                'description' => $request->description,
                 'image' => $image->hashName(),
                 'title' => $request->title,
                 'slug' => str()->slug($request->title)
